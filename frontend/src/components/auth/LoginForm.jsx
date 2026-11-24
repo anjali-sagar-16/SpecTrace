@@ -6,7 +6,7 @@ import { Alert } from '../common/Alert';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function LoginForm({ onNavigateToSignup }) {
+export function LoginForm({ onNavigateToSignup, onNavigateToDashboard }) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -113,6 +113,13 @@ export function LoginForm({ onNavigateToSignup }) {
               {JSON.stringify(apiNotice.payload, null, 2)}
             </pre>
           </div>
+          {onNavigateToDashboard && (
+            <div style={{ marginTop: '12px' }}>
+              <Button variant="primary" fullWidth onClick={onNavigateToDashboard}>
+                Open SpecTrace Dashboard &rarr;
+              </Button>
+            </div>
+          )}
         </Alert>
       )}
 
@@ -182,6 +189,19 @@ export function LoginForm({ onNavigateToSignup }) {
             Sign up for SpecTrace
           </button>
         </p>
+
+        {onNavigateToDashboard && (
+          <div style={{ marginTop: '12px' }}>
+            <button
+              type="button"
+              className="text-link"
+              style={{ fontSize: '12.5px', color: '#64748b' }}
+              onClick={onNavigateToDashboard}
+            >
+              Explore Dashboard Preview &rarr;
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

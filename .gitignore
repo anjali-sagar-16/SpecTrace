@@ -1,6 +1,22 @@
 # Dependencies
 node_modules/
 */node_modules/
+.venv/
+*/.venv/
+venv/
+*/venv/
+ENV/
+env/
+
+# Python cache & artifacts
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Production builds
 dist/

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AuthLayout } from './components/auth/AuthLayout';
 import { LoginForm } from './components/auth/LoginForm';
 import { SignupForm } from './components/auth/SignupForm';
+import { DashboardLayout } from './components/dashboard/DashboardLayout';
 import './components/auth/Auth.css';
 
 function App() {
@@ -9,9 +10,12 @@ function App() {
 
   useEffect(() => {
     const syncFromHash = () => {
-      if (window.location.hash === '#signup') {
+      const hash = window.location.hash;
+      if (hash === '#signup') {
         setActiveView('signup');
-      } else if (window.location.hash === '#login') {
+      } else if (hash === '#dashboard') {
+        setActiveView('dashboard');
+      } else if (hash === '#login') {
         setActiveView('login');
       }
     };
@@ -26,12 +30,22 @@ function App() {
     window.location.hash = `#${view}`;
   };
 
+  if (activeView === 'dashboard') {
+    return <DashboardLayout onSignOut={() => navigateTo('login')} />;
+  }
+
   return (
     <AuthLayout activeTab={activeView} onSwitchTab={navigateTo}>
       {activeView === 'login' ? (
-        <LoginForm onNavigateToSignup={() => navigateTo('signup')} />
+        <LoginForm
+          onNavigateToSignup={() => navigateTo('signup')}
+          onNavigateToDashboard={() => navigateTo('dashboard')}
+        />
       ) : (
-        <SignupForm onNavigateToLogin={() => navigateTo('login')} />
+        <SignupForm
+          onNavigateToLogin={() => navigateTo('login')}
+          onNavigateToDashboard={() => navigateTo('dashboard')}
+        />
       )}
     </AuthLayout>
   );

@@ -22,6 +22,13 @@ export function AuthLayout({ children, activeTab, onSwitchTab }) {
             >
               Create Account
             </button>
+            <button
+              type="button"
+              className={`nav-tab-btn ${activeTab === 'dashboard' ? 'is-active' : ''}`}
+              onClick={() => onSwitchTab('dashboard')}
+            >
+              Dashboard
+            </button>
           </nav>
         </div>
       </header>
